@@ -20,6 +20,7 @@ __license__ = "MIT License"
 __status__ = "Prototype"
 
 # imports one per line
+import pytest
 
 
 def grade_to_gpa(grade):
@@ -44,24 +45,74 @@ def grade_to_gpa(grade):
     gpa = 0.0
 
     if type(grade) is str:
-        print ("letter") # remove this line once the code is implemented
+        if grade in ("A+", "A-", "A", "B+", "B-", "B", "FZ"):
+            letter_grade = grade
+            print("The grade entered is ", letter_grade)
+
+        else:
+            print("Error")
+            raise ValueError("Out of range input")
+
+        # remove this line once the code is implemented
         # check that the grade is one of the accepted values
         # assign grade to letter_grade
     elif type(grade) is int:
-        print("mark") # remove this line once the code is implemented
+        print("The grade entered is", grade)
+
+        # remove this line once the code is implemented
+        if 100 >= grade >= 0:
+            letter_grade = grade
+            letter_grade = mark_to_letter(grade)
+            #print(letter_grade)
+        else:
+            print("Error")
+            raise ValueError("Out of range input")
         # check that grade is in the accepted range
         # convert the numeric grade to a letter grade
         # assign the value to letter_grade
+         # letter_grade = grade
         # hint: letter_grade = mark_to_letter(grade)
+
     else:
-        # raise a TypeError exception
-        print ("error")
+          # raise a TypeError exception
+        print("error")
         raise TypeError("Invalid type passed as parameter")
 
     # write a long if-statement to convert letter_grade
     # assign the value to gpa
     if letter_grade == "A":
         gpa = 4.0
-
+    elif letter_grade == "A+":
+        gpa = 4.0
+    elif letter_grade == "A-":
+        gpa = 3.7
+    elif letter_grade == "B+":
+        gpa = 3.3
+    elif letter_grade == "B":
+        gpa = 3.0
+    elif letter_grade == "B-":
+        gpa = 2.7
+    elif letter_grade == "FZ":
+        gpa = 0.0
+    print("The corresponding gpa is ", gpa)
     return gpa
+
+
+def mark_to_letter(grade):
+    letter_grade = ""
+    if 100 >= grade >= 90:
+        letter_grade = "A+"
+    elif 89 >= grade >= 85:
+        letter_grade = "A"
+    elif 84 >= grade >= 80:
+        letter_grade = "A-"
+    elif 79 >= grade >= 77:
+        letter_grade = "B+"
+    elif 76 >= grade >= 73:
+        letter_grade = "B"
+    elif 72 >= grade >= 70:
+        letter_grade = "B-"
+    elif 69 >= grade >= 0:
+        letter_grade = "FZ"
+    return letter_grade
 
